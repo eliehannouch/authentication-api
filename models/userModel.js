@@ -15,6 +15,14 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
+    role: {
+      type: String,
+      default: "user",
+      enum: ["admin", "ceo", "user"],
+    },
+    profilePic: String,
+    cloudinary_id: String,
+
     password: {
       type: String,
       required: true,

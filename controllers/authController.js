@@ -226,3 +226,16 @@ exports.resetPassword = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.restrictRoutes = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        res
+          .status(401)
+          .json({ message: "You dont have permission to access this page" })
+      );
+    }
+    next();
+  };
+};
